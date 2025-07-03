@@ -1,0 +1,8 @@
+
+variables:
+  LAUNCH_ID: "$CI_PIPELINE_ID"
+
+include:
+  - local: scripts/runner.yml
+  - local: subjects/ci.yml
+  - local: methods/ci.yml

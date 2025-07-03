@@ -1,0 +1,4 @@
+{
+    "weight": ["AHIQ_vit_p8_epoch33-da3ea303.pth", "resnet50_a1_0-14fe96d1.pth", "B_8-i21k-300ep-lr_0.001-aug_medium1-wd_0.1-do_0.0-sd_0.0--imagenet2012-steps_20k-lr_0.01-res_224.npz"],
+    "module": "model", "is_fr": true
+}

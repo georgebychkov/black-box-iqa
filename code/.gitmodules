@@ -1,0 +1,111 @@
+[submodule "subjects/WaDIQaM"]
+	path = subjects/wadiqam/src
+	url = https://github.com/lidq92/WaDIQaM
+[submodule "subjects/vmaf"]
+	path = subjects/vmaf/src
+	url = https://github.com/Netflix/vmaf
+[submodule "subjects/image-similarity-measures"]
+	path = subjects/image-similarity-measures/src
+	url = https://github.com/up42/image-similarity-measures
+[submodule "subjects/paq2piq/src"]
+	path = subjects/paq2piq/src
+	url = https://github.com/baidut/PaQ-2-PiQ_GAE.git
+[submodule "subjects/vtamiq/src"]
+	path = subjects/vtamiq/src
+	url = https://github.com/ch-andrei/VTAMIQ.git
+[submodule "subjects/contrique/src"]
+	path = subjects/contrique/src
+	url = https://github.com/pavancm/CONTRIQUE.git
+[submodule "subjects/conformer-bns/src"]
+	path = subjects/conformer-bns/src
+	url = https://github.com/mv-lab/IQA-Conformer-BNS.git
+[submodule "subjects/maniqa/src"]
+	path = subjects/maniqa/src
+	url = https://github.com/IIGROUP/MANIQA.git
+[submodule "subjects/hyper-iqa/src"]
+	path = subjects/hyper-iqa/src
+	url = https://github.com/SSL92/hyperIQA.git
+[submodule "subjects/tres/src"]
+	path = subjects/tres/src
+	url = https://github.com/isalirezag/TReS.git
+[submodule "subjects/cnniqa/src"]
+	path = subjects/cnniqa/src
+	url = https://github.com/lidq92/CNNIQA.git
+[submodule "subjects/fpr/src"]
+	path = subjects/fpr/src
+	url = https://github.com/Baoliang93/FPR.git
+[submodule "subjects/wsp/src"]
+	path = subjects/wsp/src
+	url = https://github.com/yichengsu/ICIP2020-WSP-IQA.git
+[submodule "subjects/clip-iqa/src"]
+	path = subjects/clip-iqa/src
+	url = https://github.com/IceClear/CLIP-IQA.git
+[submodule "subjects/unique/src"]
+	path = subjects/unique/src
+	url = https://github.com/zwx8981/UNIQUE
+[submodule "subjects/asna-macs/src"]
+	path = subjects/asna-macs/src
+	url = https://github.com/AliRoyat/NTIRE2021-IQA-MACS-Pytorch.git
+[submodule "subjects/cvrkd-iqa/src"]
+	path = subjects/cvrkd-iqa/src
+	url = https://github.com/guanghaoyin/CVRKD-IQA.git
+[submodule "subjects/dss/src"]
+	path = subjects/dss/src
+	url = https://github.com/photosynthesis-team/piq.git
+[submodule "subjects/eonss/src"]
+	path = subjects/eonss/src
+	url = https://github.com/icbcbicc/EONSS-demo.git
+[submodule "subjects/haar-psi/src"]
+	path = subjects/haar-psi/src
+	url = https://github.com/francois-rozet/piqa.git
+[submodule "subjects/fid/src"]
+	path = subjects/fid/src
+	url = https://github.com/francois-rozet/piqa.git
+[submodule "subjects/ms-gmsd/src"]
+	path = subjects/ms-gmsd/src
+	url = https://github.com/francois-rozet/piqa.git
+[submodule "subjects/mdsi/src"]
+	path = subjects/mdsi/src
+	url = https://github.com/francois-rozet/piqa.git
+[submodule "subjects/ms-ssim/src"]
+	path = subjects/ms-ssim/src
+	url = https://github.com/francois-rozet/piqa.git
+[submodule "subjects/iw-ssim/src"]
+	path = subjects/iw-ssim/src
+	url = https://github.com/photosynthesis-team/piq.git
+[submodule "subjects/sr-sim/src"]
+	path = subjects/sr-sim/src
+	url = https://github.com/photosynthesis-team/piq.git
+[submodule "subjects/iqt/src"]
+	path = subjects/iqt/src
+	url = https://github.com/anse3832/IQT.git
+[submodule "subjects/koniqplusplus/src"]
+	path = subjects/koniqplusplus/src
+	url = https://github.com/SSL92/koniqplusplus.git
+[submodule "subjects/mr-perceptual/src"]
+	path = subjects/mr-perceptual/src
+	url = https://github.com/ENSTA-U2IS/MR_perceptual.git
+[submodule "subjects/swin-iqa/src"]
+	path = subjects/swin-iqa/src
+	url = https://github.com/USTC-IMCL/SwinIQA.git
+[submodule "subjects/liqe/src"]
+	path = subjects/liqe/src
+	url = https://github.com/zwx8981/LIQE.git
+[submodule "subjects/compressed-vqa-fr/src"]
+	path = subjects/compressed-vqa-fr/src
+	url = https://github.com/sunwei925/CompressedVQA.git
+[submodule "subjects/compressed-vqa-nr/src"]
+	path = subjects/compressed-vqa-nr/src
+	url = https://github.com/sunwei925/CompressedVQA.git
+[submodule "subjects/dover/DOVER"]
+	path = subjects/dover/src
+	url = https://github.com/VQAssessment/DOVER.git
+[submodule "subjects/IQA-PyTorch"]
+	path = subjects/IQA-PyTorch
+	url = https://github.com/chaofengc/IQA-PyTorch.git
+[submodule "subjects/fast-vqa/src"]
+	path = subjects/fast-vqa/src
+	url = https://github.com/VQAssessment/FAST-VQA-and-FasterVQA.git
+[submodule "subjects/faster-vqa/src"]
+	path = subjects/faster-vqa/src
+	url = https://github.com/VQAssessment/FAST-VQA-and-FasterVQA.git

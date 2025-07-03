@@ -1,0 +1,18 @@
+FROM cnstark/pytorch:1.13.1-py3.9.12-cuda11.7.1-devel-ubuntu20.04
+
+WORKDIR /
+
+RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install -qqy gcc wget git dos2unix libgl1 libglib2.0-0
+
+RUN wget --backups=1 -nv https://titan.gml-team.ru:5003/fsdownload/Cd7p7nfuT/r_lpips_latest_net_linf_x0_x1.pth  https://titan.gml-team.ru:5003/fsdownload/Cd7p7nfuT/r_lpips_latest_net_linf_x0_x1.pth\
+ && rm r_lpips_latest_net_linf_x0_x1.pth.1
+
+COPY IQA-PyTorch /IQA-PyTorch
+RUN cd /IQA-PyTorch \
+ && pip install -r requirements.txt && python setup.py develop
+
+COPY pyiqa/download.sh /
+RUN bash download.sh
+
+COPY r-lpips/src /src
+COPY r-lpips/config.json /src

@@ -1,0 +1,194 @@
+methods-pipeline-generator:
+  tags:
+    - storage
+  extends: .common
+  stage: .pre
+  script:
+    - apk add --no-cache bash
+    - ./scripts/attack-generate-pipeline.sh generate
+  artifacts:
+    paths:
+      - "pipeline-*.yml"
+
+
+.method:trigger:
+  stage: test
+  trigger:
+    strategy: depend
+  allow_failure: false
+
+grad-est:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-grad-est.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $grad_est == "yes"
+      when: on_success
+    - when: manual
+
+grad-est-uap:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-grad-est-uap.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $grad_est_uap == "yes"
+      when: on_success
+    - when: manual
+
+square-attack:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-square-attack.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $square_attack == "yes"
+      when: on_success
+    - when: manual
+
+square-attack-uap:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-square-attack-uap.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $square_attack_uap == "yes"
+      when: on_success
+    - when: manual    
+
+diff-evolve-uap:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-diff-evolve-uap.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $diff_evolve_uap == "yes"
+      when: on_success
+    - when: manual
+
+parsimonious:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-parsimonious.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $parsimonious == "yes"
+      when: on_success
+    - when: manual
+
+parsimonious-uap:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-parsimonious-uap.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $parsimonious_uap == "yes"
+      when: on_success
+    - when: manual
+
+patch-rs:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-patch-rs.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $patch_rs == "yes"
+      when: on_success
+    - when: manual
+
+frame-rs:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-frame-rs.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $frame_rs == "yes"
+      when: on_success
+    - when: manual
+
+l0-rs:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-l0-rs.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $l0_rs == "yes"
+      when: on_success
+    - when: manual
+
+msin-clahe:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-msin-clahe.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $msin_clahe == "yes"
+      when: on_success
+    - when: manual
+
+msin-gamma:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-msin-gamma.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $msin_gamma == "yes"
+      when: on_success
+    - when: manual
+
+msin-gamma-unsharp:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-msin-gamma-unsharp.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $msin_gamma_unsharp == "yes"
+      when: on_success
+    - when: manual
+
+msin-tonemap:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-msin-tonemap.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $msin_tonemap == "yes"
+      when: on_success
+    - when: manual
+
+ran-et-al:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-ran-et-al.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $ran_et_al == "yes"
+      when: on_success
+    - when: manual
+
+ran-et-al-uap:
+  extends: .method:trigger
+  trigger:
+    include:
+      - artifact: pipeline-ran-et-al-uap.yml
+        job: methods-pipeline-generator
+  rules:
+    - if: $ran_et_al_uap == "yes"
+      when: on_success
+    - when: manual

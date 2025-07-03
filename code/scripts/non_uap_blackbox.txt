@@ -1,0 +1,13 @@
+grad-est
+parsimonious
+square-attack
+l0-rs
+patch-rs
+frame-rs
+onepixel
+msin-clahe
+msin-gamma
+msin-gamma-unsharp
+msin-tonemap
+ran-et-al
+yang-et-al

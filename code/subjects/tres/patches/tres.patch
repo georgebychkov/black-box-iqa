@@ -1,0 +1,36 @@
+ misc.py                     | 4 +---
+ models.py => tres_models.py | 2 +-
+ 2 files changed, 2 insertions(+), 4 deletions(-)
+ rename models.py => tres_models.py (99%)
+
+diff --git a/misc.py b/misc.py
+index 7b4586b..41fa260 100644
+--- a/misc.py
++++ b/misc.py
+@@ -19,9 +19,7 @@ from torch import Tensor
+ 
+ # needed due to empty tensor bug in pytorch and torchvision 0.5
+ import torchvision
+-if float(torchvision.__version__[:3]) < 0.7:
+-    from torchvision.ops import _new_empty_tensor
+-    from torchvision.ops.misc import _output_size
++
+ 
+ 
+ class SmoothedValue(object):
+diff --git a/models.py b/tres_models.py
+similarity index 99%
+rename from models.py
+rename to tres_models.py
+index 162f2c5..af899ae 100644
+--- a/models.py
++++ b/tres_models.py
+@@ -53,7 +53,7 @@ class Net(nn.Module):
+ 		if cfg.network =='resnet50':
+ 			from resnet_modify  import resnet50 as resnet_modifyresnet
+ 			dim_modelt = 3840
+-			modelpretrain = models.resnet50(pretrained=True)
++			modelpretrain = models.resnet50(pretrained=False)
+ 
+ 		elif cfg.network =='resnet34':
+ 			from resnet_modify  import resnet34 as resnet_modifyresnet

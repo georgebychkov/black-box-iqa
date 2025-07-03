@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vtamiq"
+version = "1.0.0"
+requires-python = ">=3.7"
+dependencies = [
+    "protobuf==3.20.*",
+    "tqdm",
+    "tensorboardX",
+    "tabulate",
+    "numpy<1.24.0",
+    "scipy",
+    "scikit-image",
+    "matplotlib",
+    "PyYAML",
+]

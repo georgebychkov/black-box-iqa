@@ -1,0 +1,25 @@
+diff --git a/run_config.py b/run_config.py
+index 3f78d60..8645da1 100644
+--- a/run_config.py
++++ b/run_config.py
+@@ -198,7 +198,7 @@ vtamiq_runtime_config = OrderedDict(
+     # ii) pretrain the complete VTAMIQ on KADIS-700k
+
+     # toggle whether using pretrained ViT (Imagenet) is allowed
+-    allow_pretrained_weights=True,
++    allow_pretrained_weights=False,
+
+     # if using pretrained VTAMIQ (not just pretrained ViT), toggle whether loading ViT or Diffnet weights is allowed
+     allow_pretrained_weights_vit=True,
+diff --git a/run_main.py b/run_main.py
+index 037e664..e962cf0 100644
+--- a/run_main.py
++++ b/run_main.py
+@@ -175,7 +175,7 @@ def get_model(device, is_full_reference, checkpoint_file=None):
+     if pretrained_model:
+         print("Model loading pretrained weights...")
+         model_state_dict = get_checkpoint(checkpoint_file, device)[MODEL_STATE_DICT]
+-        load_model(model_state_dict, model, "model")
++        load_model(model_state_dict, model)
+     else:
+         print("WARNING: VTAMIQ used without pre-trained model weights.")

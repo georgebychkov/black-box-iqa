@@ -1,0 +1,41 @@
+diff --git a/piqa/fid.py b/piqa/fid.py
+index db1d3b7..f7aba71 100644
+--- a/piqa/fid.py
++++ b/piqa/fid.py
+@@ -106,8 +106,10 @@ class InceptionV3(nn.Sequential):
+         torch.Size([5, 1000])
+     """
+ 
+-    def __init__(self, logits: bool = True):
+-        net = torchvision.models.inception_v3(weights='DEFAULT')
++    def __init__(self, logits: bool = True, weights_path=None):
++        net = torchvision.models.inception_v3(weights=('DEFAULT' if weights_path is None else None))
++        if weights_path is not None:
++            net.load_state_dict(torch.load(weights_path))
+ 
+         layers = [
+             net.Conv2d_1a_3x3,
+@@ -153,19 +155,19 @@ class FID(nn.Module):
+         torch.Size([])
+     """
+ 
+-    def __init__(self):
++    def __init__(self, weights_path=None):
+         super().__init__()
+ 
+         # ImageNet normalization
+         self.normalize = ImageNetNorm()
+ 
+         # Inception-v3
+-        self.inception = InceptionV3(logits=False)
++        self.inception = InceptionV3(logits=False, weights_path=weights_path)
+         self.inception.eval()
+ 
+         # Disable gradients
+-        for p in self.parameters():
+-            p.requires_grad = False
++        # for p in self.parameters():
++            # p.requires_grad = False
+ 
+     def features(self, x: Tensor, no_grad: bool = True) -> Tensor:
+         r"""Returns the inception features of an input.

@@ -1,0 +1,4 @@
+{
+    "weight": ["CKDN_model_best-38b27dc6.pth", "resnet50-19c8e357.pth"],
+    "module": "model", "is_fr": true
+}

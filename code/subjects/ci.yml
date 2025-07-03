@@ -1,0 +1,429 @@
+metric:init:
+  tags:
+    - storage
+  extends: .common
+  stage: .pre
+  script:
+    - docker login -u gitlab-ci-token -p "$CI_JOB_TOKEN" "$NEW_CI_REGISTRY"
+    - IMAGE="${NEW_CI_REGISTRY}/init:$CI_PIPELINE_ID"
+    - cd subjects/_init
+    - docker build -t "$IMAGE" .
+    - docker push "$IMAGE"
+
+.metric:build:
+  tags:
+    - storage
+  extends: .common
+  stage: build
+  variables:
+    PARAM_DOCKER_BUILD_PATH: .
+    PARAM_IQA_PYTORCH: 0
+  script:
+    - apk add --no-cache bash
+    - ./scripts/metric-build.sh
+  retry: 2
+
+.metric:test:
+  tags:
+    - storage
+  extends: .common
+  stage: test
+  image: "$NEW_CI_REGISTRY/init:$CI_PIPELINE_ID"
+  variables:
+    PARAM_COLORSPACE: rgb24
+    PARAM_NOREF: 0
+  script:
+    - ./scripts/metric-test.sh
+  artifacts:
+    name: ${CI_JOB_NAME%:*}
+    paths:
+      - "*.log"
+  rules:
+    - changes:
+      - subjects/${CI_JOB_NAME%:*}/**
+  retry: 2
+
+.metric-noref:test:
+  extends: .metric:test
+  variables:
+    PARAM_NOREF: 1
+
+
+
+
+
+# tres:build:
+#   extends: .metric:build
+# tres:test:
+#   extends: .metric-noref:test
+
+# nima:build:
+#   extends: .metric:build
+# nima:test:
+#   extends: .metric-noref:test
+
+# spaq:build:
+#   extends: .metric:build
+# spaq:test:
+#   extends: .metric-noref:test
+
+# rank-iqa:build:
+#   extends: .metric:build
+# rank-iqa:test:
+#   extends: .metric-noref:test
+
+# meta-iqa:build:
+#   extends: .metric:build
+# meta-iqa:test:
+#   extends: .metric-noref:test
+
+# hyper-iqa:build:
+#   extends: .metric:build
+# hyper-iqa:test:
+#   extends: .metric-noref:test
+
+# ckdn:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+# ckdn:test:
+#   extends: .metric:test
+
+# stlpips:build:
+#   extends: .metric:build
+# stlpips:test:
+#   extends: .metric:test
+
+# vtamiq:build:
+#   extends: .metric:build
+# vtamiq:test:
+#   extends: .metric:test
+
+# contrique:build:
+#   extends: .metric:build
+# contrique:test:
+#   extends: .metric:test
+
+# conformer-bns:build:
+#   extends: .metric:build
+# conformer-bns:test:
+#   extends: .metric:test
+
+# compressed-vqa-nr:build:
+#   extends: .metric:build
+
+# compressed-vqa-fr:build:
+#   extends: .metric:build
+
+# liqe:build:
+#   extends: .metric:build
+  
+# swin-iqa:build:
+#   extends: .metric:build
+  
+# mr-perceptual:build:
+#   extends: .metric:build
+  
+# koniqplusplus:build:
+#   extends: .metric:build
+  
+# iqt:build:
+#   extends: .metric:build
+
+# sr-sim:build:
+#   extends: .metric:build
+  
+# iw-ssim:build:
+#   extends: .metric:build
+  
+# mdsi:build:
+#   extends: .metric:build
+  
+# ms-gmsd:build:
+#   extends: .metric:build
+  
+# fid:build:
+#   extends: .metric:build
+  
+# haar-psi:build:
+#   extends: .metric:build
+  
+# eonss:build:
+#   extends: .metric:build
+
+# dss:build:
+#   extends: .metric:build
+  
+# cvrkd-iqa:build:
+#   extends: .metric:build
+
+# brisque:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# cw-ssim:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# fsim:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# gmsd:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# ilniqe:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# mad:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# musiq:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# niqe:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# nlpd:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# vif:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# vsi:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# vmaf-by-26m-hre:build:
+#   extends: .metric:build
+  
+  
+# r-lpips:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+  
+# clip-iqa:build:
+#   extends: .metric:build
+
+  
+# cnniqa:build:
+#   extends: .metric:build
+
+  
+# fpr:build:
+#   extends: .metric:build
+  
+# wsp:build:
+#   extends: .metric:build
+
+
+# 26a-kir-gradcam:build:
+#   extends: .metric:build
+# 26a-kir-gradcam:test:
+#   extends: .metric-noref:test
+
+# # 26a-kir-baseline:build:
+# #   extends: .metric:build
+# # 26a-kir-baseline:test:
+# #   extends: .metric-noref:test
+
+# # 26a-kir-vg-soft:build:
+# #   extends: .metric:build
+# # 26a-kir-vg-soft:test:
+# #   extends: .metric-noref:test
+
+# # 26a-kir-vg-hard:build:
+# #   extends: .metric:build
+# # 26a-kir-vg-hard:test:
+# #   extends: .metric-noref:test
+
+# # 26a-kir-corners:build:
+# #   extends: .metric:build
+# # 26a-kir-corners:test:
+# #   extends: .metric-noref:test
+
+# e-lpips:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# robust-linearity-free-lpips-4:build:
+#   extends: .metric:build
+# robust-linearity-free-lpips-4:test:
+#   extends: .metric-noref:test
+
+# robust-linearity-apgd-ssim-2:build:
+#   extends: .metric:build
+# robust-linearity-apgd-ssim-2:test:
+#   extends: .metric-noref:test
+
+# robust-linearity-apgd-ssim-4:build:
+#   extends: .metric:build
+# robust-linearity-apgd-ssim-4:test:
+#   extends: .metric-noref:test
+
+# robust-linearity-free-ssim-2:build:
+#   extends: .metric:build
+# robust-linearity-free-ssim-2:test:
+#   extends: .metric-noref:test
+
+# robust-linearity-free-ssim-4:build:
+#   extends: .metric:build
+# robust-linearity-free-ssim-4:test:
+#   extends: .metric-noref:test
+
+# robust-linearity-free-lpips-2:build:
+#   extends: .metric:build
+# robust-linearity-free-lpips-2:test:
+#   extends: .metric-noref:test
+
+# robust-linearity-apgd-lpips-2:build:
+#   extends: .metric:build
+# robust-linearity-apgd-lpips-2:test:
+#   extends: .metric-noref:test
+
+# robust-linearity-apgd-lpips-4:build:
+#   extends: .metric:build
+# robust-linearity-apgd-lpips-4:test:
+#   extends: .metric-noref:test
+
+# dover:build:
+#   extends: .metric:build
+# dover:test:
+#   extends: .metric:test
+
+# a-dists:build:
+#   extends: .metric:build
+
+# topiq-fr:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# clip-iqa-plus:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# wadiqam-nr:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# wadiqam-fr:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# dvqa:build:
+#   extends: .metric:build
+# dvqa:test:
+#   extends: .metric:test
+  
+# fast-vqa:build:
+#   extends: .metric:build
+
+# faster-vqa:build:
+#   extends: .metric:build
+
+
+
+
+# paq2piq:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# linearity:build:
+#   extends: .metric:build
+# linearity:test:
+#   extends: .metric-noref:test
+
+# mdtvsfa:build:
+#   extends: .metric:build
+# mdtvsfa:test:
+#   extends: .metric-noref:test
+
+# vsfa:build:
+#   extends: .metric:build
+# vsfa:test:
+#   extends: .metric-noref:test
+
+# koncept:build:
+#   extends: .metric:build
+# koncept:test:
+#   extends: .metric-noref:test
+
+# maniqa:build:
+#   extends: .metric:build
+# maniqa:test:
+#   extends: .metric-noref:test
+
+# unique:build:
+#   extends: .metric:build
+
+# ms-ssim:build:
+#   extends: .metric:build
+
+# asna-macs:build:
+#   extends: .metric:build
+
+# dbcnn:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# pieapp:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# dists:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# lpips-vgg:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# lpips-alex:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+# ahiq:build:
+#   extends: .metric:build
+#   variables:
+#     PARAM_IQA_PYTORCH: 1
+
+topiq-nr:build:
+  extends: .metric:build
+  variables:
+    PARAM_IQA_PYTORCH: 1
+
+# vmaf:build:
+#   extends: .metric:build
+
+# vmaf-neg:build:
+#   extends: .metric:build

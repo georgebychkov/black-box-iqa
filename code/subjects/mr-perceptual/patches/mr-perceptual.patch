@@ -1,0 +1,24 @@
+diff --git a/mrpl/pretrained_networks.py b/mrpl/pretrained_networks.py
+index 5a6c688..d259fcc 100644
+--- a/mrpl/pretrained_networks.py
++++ b/mrpl/pretrained_networks.py
+@@ -7,7 +7,7 @@ def gram_matrix(input):
+     if len(input.size())==3:
+         input= input.unsqueeze(-1)
+     a, b, c, d = input.size()
+-    features = input.view(a* b, c*d)
++    features = torch.reshape(input, (a* b, c*d))
+     G = torch.mm(features, features.t())
+     return G.div(a*b*c*d)
+ 
+@@ -40,9 +40,7 @@ class alexnet(torch.nn.Module):
+             self.slice4.add_module(str(x), alexnet_pretrained_features[x])
+         for x in range(10, 12):
+             self.slice5.add_module(str(x), alexnet_pretrained_features[x])
+-        if not requires_grad:
+-            for param in self.parameters():
+-                param.requires_grad = False
++
+ 
+     def forward(self, X):
+ 

@@ -1,0 +1,78 @@
+Metadata-Version: 2.1
+Name: stlpips_pytorch
+Version: 0.0.2
+Summary: Pytorch implementation of Shift-tolerant LPIPS
+Project-URL: Homepage, https://github.com/abhijay9/ShiftTolerant-LPIPS/
+Project-URL: Bug Tracker, https://github.com/abhijay9/ShiftTolerant-LPIPS/issues
+Author-email: Abhijay Ghildyal <abhijayghildyal@gmail.com>
+License: BSD 2-Clause License
+        
+        Copyright (c) 2022, Abhijay Ghildyal, Feng Liu
+        All rights reserved.
+        
+        Redistribution and use in source and binary forms, with or without
+        modification, are permitted provided that the following conditions are met:
+        
+        1. Redistributions of source code must retain the above copyright notice, this
+           list of conditions and the following disclaimer.
+        
+        2. Redistributions in binary form must reproduce the above copyright notice,
+           this list of conditions and the following disclaimer in the documentation
+           and/or other materials provided with the distribution.
+        
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+        AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+        IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+        FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+        DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+        SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+        CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+        OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+        OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
+
+# ShiftTolerant-LPIPS
+
+**Shift-tolerant Perceptual Similarity Metric**
+
+[Abhijay Ghildyal](https://abhijay9.github.io/), [Feng Liu](http://web.cecs.pdx.edu/~fliu/). In ECCV, 2022. [[Arxiv]](https://arxiv.org/abs/2207.13686)
+
+<img src="https://abhijay9.github.io/images/stlpips_teaser.gif" width=300>
+
+```python
+from stlpips_pytorch import stlpips
+from stlpips_pytorch import utils
+
+path0 = "<dir>/ShiftTolerant-LPIPS/imgs/ex_p0.png"
+path1 = "<dir>/ShiftTolerant-LPIPS/imgs/ex_ref.png"
+
+img0 = utils.im2tensor(utils.load_image(path0))
+img1 = utils.im2tensor(utils.load_image(path1))
+
+stlpips_metric = stlpips.LPIPS(net="alex", variant="shift_tolerant")
+
+stlpips_metric(img0,img1)
+# 0.7777554988861084
+```
+
+## Citation
+
+If you find this repository useful for your research, please use the following.
+
+```
+@inproceedings{ghildyal2022stlpips,
+  title={Shift-tolerant Perceptual Similarity Metric},
+  author={Ghildyal, Abhijay and Liu, Feng},
+  booktitle={European Conference on Computer Vision},
+  year={2022}
+}
+```
+
+## Acknowledgements
+This repository borrows from [LPIPS](https://github.com/richzhang/PerceptualSimilarity), [Anti-aliasedCNNs](https://github.com/adobe/antialiased-cnns), and [CNNsWithoutBorders](https://github.com/oskyhn/CNNs-Without-Borders). We thank the authors of these repositories for their incredible work and inspiration.

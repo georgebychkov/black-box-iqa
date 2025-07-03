@@ -1,0 +1,48 @@
+diff --git a/fastvqa/models/evaluator.py b/fastvqa/models/evaluator.py
+index c9e42df..3e22e01 100644
+--- a/fastvqa/models/evaluator.py
++++ b/fastvqa/models/evaluator.py
+@@ -109,25 +109,25 @@ class DiViDeAddEvaluator(nn.Module):
+     def forward(self, vclips, inference=True, return_pooled_feats=False, reduce_scores=True, pooled=False, **kwargs):
+         if inference:
+             self.eval()
+-            with torch.no_grad():
++            #with torch.no_grad():
+                 
+-                scores = []
+-                feats = {}
+-                for key in vclips:
+-                    feat = getattr(self, key.split("_")[0]+"_backbone")(vclips[key], multi=self.multi, layer=self.layer, **kwargs)
+-                    if hasattr(self, key.split("_")[0]+"_head"):
+-                        scores += [getattr(self, key.split("_")[0]+"_head")(feat)]
+-                    else:
+-                        scores += [getattr(self, "vqa_head")(feat)]
+-                    if return_pooled_feats:
+-                        feats[key] = feat.mean((-3,-2,-1))
+-                if reduce_scores:
+-                    if len(scores) > 1:
+-                        scores = reduce(lambda x,y:x+y, scores)
+-                    else:
+-                        scores = scores[0]
+-                    if pooled:
+-                        scores = torch.mean(scores, (1,2,3,4))
++            scores = []
++            feats = {}
++            for key in vclips:
++                feat = getattr(self, key.split("_")[0]+"_backbone")(vclips[key], multi=self.multi, layer=self.layer, **kwargs)
++                if hasattr(self, key.split("_")[0]+"_head"):
++                    scores += [getattr(self, key.split("_")[0]+"_head")(feat)]
++                else:
++                    scores += [getattr(self, "vqa_head")(feat)]
++                if return_pooled_feats:
++                    feats[key] = feat.mean((-3,-2,-1))
++            if reduce_scores:
++                if len(scores) > 1:
++                    scores = reduce(lambda x,y:x+y, scores)
++                else:
++                    scores = scores[0]
++                if pooled:
++                    scores = torch.mean(scores, (1,2,3,4))
+             self.train()
+             if return_pooled_feats:
+                 return scores, feats

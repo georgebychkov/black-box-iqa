@@ -1,0 +1,1 @@
+{"weight": ["iqt_PIPAL.pth", "inceptionresnetv2-520b38e4.pth"], "module": "model_iqt", "is_fr": true}

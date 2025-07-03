@@ -1,0 +1,26 @@
+diff --git a/configs/PIPAL/IQA_Conformer.py b/configs/PIPAL/IQA_Conformer.py
+index c266a9b..6997fe9 100644
+--- a/configs/PIPAL/IQA_Conformer.py
++++ b/configs/PIPAL/IQA_Conformer.py
+@@ -36,7 +36,7 @@ class CNN_Model(nnet.Regressor):
+         train_backbone = False
+ 
+         # Backbone modules
+-        backbone_modules = list(pretrainedmodels.inceptionresnetv2().modules())
++        backbone_modules = list(pretrainedmodels.inceptionresnetv2(pretrained=None).modules())
+ 
+         # Stem
+         self.mixed5b = nn.Sequential(backbone_modules[1], backbone_modules[5], backbone_modules[9], backbone_modules[13], backbone_modules[14], backbone_modules[18], backbone_modules[22], backbone_modules[23])
+@@ -135,9 +135,9 @@ class CNN_Model(nnet.Regressor):
+ 
+         x_ref, x_dis = x
+ 
+-        with torch.no_grad():
+-            x_ref = self.backbone(x_ref)
+-            x_dis = self.backbone(x_dis)
++        #with torch.no_grad():
++        x_ref = self.backbone(x_ref)
++        x_dis = self.backbone(x_dis)
+ 
+         x_diff = x_ref - x_dis
+ 

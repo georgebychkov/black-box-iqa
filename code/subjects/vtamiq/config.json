@@ -1,0 +1,4 @@
+{
+    "weight": ["latest.pth"],
+    "module": "model", "is_fr": true
+}
